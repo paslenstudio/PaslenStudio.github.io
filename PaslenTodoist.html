@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The script element</h1>
+
+<p id="demo"></p>
+
+<script>
+let params = new URLSearchParams(window.location.search);
+let code = params.get('code')
+let state = params.get('state')
+window.location.href = 'app://paslen.alki.com/todoist?code=' + code + '&state=' + state
+</script> 
+
+</body>
+</html>
