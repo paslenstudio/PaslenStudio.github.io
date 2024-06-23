@@ -1,20 +1,64 @@
-
-<!DOCTYPE html>
-<html>
-<body>
-    <style>
-        body {
-          font-family: Tahoma, sans-serif;
-        }
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Custom Authorisation Page</title>
+        <style>
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+            }
+            .center-div {
+                text-align: center;
+            }
+            .images {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .images img {
+                height: 50px;
+                width: 50px;
+            }
+            .plus-sign {
+                margin: 0 10px;
+                font-size: 24px;
+            }
         </style>
-    <h6>🏁Authentication successful!<br>
-        You will be redirected back to Paslen! 📲 </h6>
-<script>
-let params = new URLSearchParams(window.location.search);
-let code = params.get('code')
-let state = params.get('state')
-window.location.href = 'app://paslen.alki.com/todoist?code=' + code + '&state=' + state
-</script> 
+    </head>
+    <body>
+        <div class="center-div">
+            <div class="images">
+                <img src="https://todoist.com/favicon.ico" alt="Todoist Icon" />
+                <span class="plus-sign">+</span>
+                <img src="paslen_ico.png" alt="Paslen Icon" />
+            </div>
+            <div id="status-text" style="padding-top: 25px" />
+        </div>
 
-</body>
+        <script>
+            window.onload = function () {
+                const params = new URLSearchParams(window.location.search);
+                const statusText = document.getElementById("status-text");
+                if (params.get("code")) {
+                    statusText.innerText =
+                        "✅️ Authorisation successful, you will be redirected";
+                    setTimeout(() => {
+                        window.location.href =
+                            "app://paslen.alki.com/todoist?code=" +
+                            params.get("code");
+                    }, 3000);
+                } else {
+                    statusText.innerText =
+                        "❗ Error during authorisation: " + params.get("error");
+                }
+            };
+        </script>
+    </body>
 </html>
