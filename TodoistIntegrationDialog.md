@@ -1,6 +1,6 @@
 # <img src="todoist_ico.png" alt="Todoist app cion" width="40"/>  + <img src="paslen_ico.png" alt="Todoist app cion" width="40"/> Integration
 
-The application offers an option to enable integration with Todoist. Below are the instructions and a list of features available with this integration:
+[Paslen timer](https://play.google.com/store/apps/details?id=com.alki.paslen) offers an option to enable integration with [Todoist](https://todoist.com/). Below are the instructions and a list of features available with this integration:
  - [Setup integration](#setup-integration)
  - [Obtaining a list of tasks](#obtaining-a-list-of-tasks)
  - [Adding a task](#adding-a-task)
@@ -36,3 +36,8 @@ There is an option to retrieve timer settings, such as work timer duration and r
 
  ### Troubleshooting
 Enabling integration requires you to be logged into Todoist through your default browser. If you have the Todoist app installed and are not logged into Todoist in your phone’s default browser, it may be challenging to log into Todoist in the browser, as the system redirects you to the Todoist app when navigating to the Todoist login screen. In this situation, you can uninstall the Todoist app from your phone, log into Todoist via the browser, and then reinstall the Todoist app.
+
+<a href="[https://example.com](https://play.google.com/store/apps/details?id=com.alki.paslen)" class="image-link">
+            <img src="GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get Paslen on Google Play">
+</a>
+
