@@ -38,6 +38,6 @@ There is an option to retrieve timer settings, such as work timer duration and r
 Enabling integration requires you to be logged into Todoist through your default browser. If you have the Todoist app installed and are not logged into Todoist in your phone’s default browser, it may be challenging to log into Todoist in the browser, as the system redirects you to the Todoist app when navigating to the Todoist login screen. In this situation, you can uninstall the Todoist app from your phone, log into Todoist via the browser, and then reinstall the Todoist app.
 
 <a href="[https://example.com](https://play.google.com/store/apps/details?id=com.alki.paslen)" class="image-link">
-            <img src="GetItOnGooglePlay_Badge_Web_color_English.png" alt="Get Paslen on Google Play">
+            <img src="GetItOnGooglePlay_Badge_Web_color_English.png" height="40" alt="Get Paslen on Google Play">
 </a>
 
