@@ -1,4 +1,4 @@
-# <img src="todoist_ico.png" alt="Todoist app cion" width="40"/>  + <img src="paslen_ico.png" alt="Todoist app cion" width="40"/> Integration
+# Todoist <img src="todoist_ico.png" alt="Todoist app icon" width="40"/> + Paslen <img src="paslen_ico.png" alt="Paslen app icon" width="40"/> Integration
 
 [Paslen timer](https://play.google.com/store/apps/details?id=com.alki.paslen) offers an option to enable integration with [Todoist](https://todoist.com/). Below are the instructions and a list of features available with this integration:
  - [Setup integration](#setup-integration)
@@ -13,7 +13,9 @@ In some cases, errors may occur during the integration setup. See [Troubleshooti
 
 ### Setup Integration
 
-To set up integration with Todoist, click the “Settings” button at the top right corner of the main screen, then scroll down to the “Todoist Integration” option. Check “Enabled,” and you will be navigated to the Todoist authentication page. Todoist will ask if you want to use the Todoist+Paslen Integration. If you click “Accept,” you will be redirected to the Paslen website, and then back to the Paslen application. The integration is now enabled.
+To set up integration with Todoist, click the “Settings” button at the top right corner of the main screen, then scroll down to the “Todoist Integration” option. Check “Enabled,” and you will be navigated to the Todoist website. Todoist will ask if you agree to give Paslen the required access to use the Todoist+Paslen Integration. If you click “Agree,” you will be redirected to the Paslen website, and then back to the Paslen application. The integration is now enabled.
+
+Note: Ensure you are logged into Todoist through your default browser before setting up the integration. If not, please see[Troubleshooting](#troubleshooting).
 
 ### Obtaining a list of tasks
 
