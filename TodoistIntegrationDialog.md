@@ -9,7 +9,7 @@
  - [Getting Settings from the Task](#getting-settings-from-the-task)
 
 
-In some cases, errors may occur during the integration setup. See [Troubleshooting](#troubleshooting).
+In some cases, errors may occur during the integration setup. See  [Troubleshooting](#troubleshooting).
 
 ### Setup Integration
 
