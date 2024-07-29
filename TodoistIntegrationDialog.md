@@ -9,13 +9,13 @@
  - [Getting Settings from the Task](#getting-settings-from-the-task)
 
 
-In some cases, errors may occur during the integration setup. See  [Troubleshooting](#troubleshooting).
+In some cases, errors may occur during the integration setup. See [troubleshooting](#troubleshooting).
 
 ### Setup Integration
 
 To set up integration with Todoist, click the “Settings” button at the top right corner of the main screen, then scroll down to the “Todoist Integration” option. Check “Enabled,” and you will be navigated to the Todoist website. Todoist will ask if you agree to give Paslen the required access to use the Todoist+Paslen Integration. If you click “Agree,” you will be redirected to the Paslen website, and then back to the Paslen application. The integration is now enabled.
 
-Note: Ensure you are logged into Todoist through your default browser before setting up the integration. If not, please see[Troubleshooting](#troubleshooting).
+Note: Ensure you are logged into Todoist through your default browser before setting up the integration. If not, please see [troubleshooting](#troubleshooting).
 
 ### Obtaining a list of tasks
 
