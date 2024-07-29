@@ -17,6 +17,10 @@ To set up integration with Todoist, click the “Settings” button at the top r
 
 Note: Ensure you are logged into Todoist through your default browser before setting up the integration. If not, please see [troubleshooting](#troubleshooting).
 
+<img src="assets/images/step1.jsp" alt="Integration step 1" width="300"/>
+<img src="assets/images/step2.jsp" alt="Integration step 2" width="300"/>
+<img src="assets/images/step3.jsp" alt="Integration step 3" width="300"/>
+
 ### Obtaining a list of tasks
 
 If you set up Todoist integration, the task list will be automatically updated with every task addition from the app. You can also update the task list manually by clicking the refresh button at the bottom of the list.
