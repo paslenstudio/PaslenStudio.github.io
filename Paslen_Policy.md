@@ -3,7 +3,15 @@
 I/We, Paslen Developers, takes your privacy seriously. To better protect your privacy Paslen provide this privacy policy notice explaining the way your personal information is collected and used.
 
 ### Collection of Routine Information
-This app track no information about its users. This app does not collect any personally identifiable information.
+Paslen app does not require users to create an account and does not collect personally identifiable information directly. However, the app uses Firebase Analytics to collect aggregated usage and diagnostic analytics.
+
+### Analytics
+
+Paslen app uses Google Analytics for Firebase to understand how users interact with the app and to improve the app experience.
+
+Firebase Analytics may collect information such as app launches, app interactions, session duration, device model, operating system, approximate geography, app version, and app-instance identifiers.
+
+This data is processed by Google/Firebase according to Google’s privacy and security practices.
 
 ### Advertisement
 This app does not contain any advertisement
@@ -15,7 +23,7 @@ Paslen app have included links on Github website github.com for your use and ref
 The security of your personal information is important to Paslen. All data stored is stored in application secured storage and is not accessible to any other application.
 
 ### Changes To This Privacy Policy
-This Privacy Policy is effective as of 13.08.2023 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.
+This Privacy Policy is effective as of 05.05.2026 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.
 
 I/We, Paslen developers reserve the right to update or change this Privacy Policy at any time and you should check this Privacy Policy periodically.
 
