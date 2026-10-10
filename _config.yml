@@ -1,0 +1,18 @@
+theme: jekyll-theme-cayman
+url: https://paslenstudio.github.io
+
+# Deeplink of the "Copy & open in Paslen" button on vibe pages: it opens the app's paste
+# screen. The vibe JSON goes to the clipboard, not into the link (it doesn't fit a URL).
+paslen_deeplink: app://paslen.alki.com/vibe
+
+collections:
+  vibes:
+    output: true
+    permalink: /vibes/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: vibes
+    values:
+      layout: vibe

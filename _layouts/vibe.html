@@ -1,0 +1,45 @@
+---
+layout: vibes-base
+---
+{%- include vibe-service.html url=page.playlist -%}
+<main>
+  <a class="back" href="{{ '/vibes/' | relative_url }}">&larr; All vibes</a>
+
+  <article class="vibe">
+    <img class="vibe-preview" src="{{ page.image | relative_url }}" alt="{{ page.title }} preview" />
+
+    <div class="vibe-side">
+      <h1 class="vibe-title">{{ page.title }}</h1>
+      {%- if page.description %}
+      <p class="vibe-desc">{{ page.description }}</p>
+      {%- endif %}
+
+      <section class="json-panel">
+        <span class="json-label">json · <a href="{{ '/vibes/schema/' | relative_url }}">schema</a></span>
+        <button type="button" class="copy-btn" data-copy-json>Copy</button>
+        {{ content }}
+      </section>
+
+      {%- if page.playlist %}
+      <a class="playlist" href="{{ page.playlist }}" target="_blank" rel="noopener">
+        <span class="badge badge-{{ service_key }}">{{ service_letter }}</span>
+        <span class="playlist-text">
+          <span class="playlist-title">Playlist on {{ service_name }}</span>
+          <span class="playlist-url">{{ page.playlist | remove_first: "https://" | remove_first: "http://" | remove_first: "www." }}</span>
+        </span>
+        <span class="playlist-arrow" aria-hidden="true">&#8599;</span>
+      </a>
+      {%- endif %}
+
+      <a class="open-btn" href="{{ site.paslen_deeplink }}" data-deeplink="{{ site.paslen_deeplink }}"{% if page.playlist %} data-playlist="{{ page.playlist }}"{% endif %}>
+        <img src="{{ '/paslen_ico.png' | relative_url }}" alt="" width="30" height="30" />
+        Copy &amp; open in Paslen
+      </a>
+      <p class="open-hint">The vibe is copied — tap <b>Paste</b> in the app.</p>
+      <p class="get-app">
+        No Paslen yet?
+        <a href="https://play.google.com/store/apps/details?id=com.alki.paslen" target="_blank" rel="noopener">Get it on Google Play</a>
+      </p>
+    </div>
+  </article>
+</main>

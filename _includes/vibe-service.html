@@ -1,0 +1,19 @@
+{%- comment -%}
+  Detects the music service from a playlist URL.
+  Usage: {% include vibe-service.html url=vibe.playlist %}
+  Sets: service_key, service_name, service_letter (visible to the caller).
+{%- endcomment -%}
+{%- assign service_url = include.url | downcase -%}
+{%- if service_url contains "spotify." -%}
+  {%- assign service_key = "spotify" -%}{%- assign service_name = "Spotify" -%}{%- assign service_letter = "S" -%}
+{%- elsif service_url contains "yandex." -%}
+  {%- assign service_key = "yandex" -%}{%- assign service_name = "Яндекс Музыка" -%}{%- assign service_letter = "Я" -%}
+{%- elsif service_url contains "deezer." -%}
+  {%- assign service_key = "deezer" -%}{%- assign service_name = "Deezer" -%}{%- assign service_letter = "D" -%}
+{%- elsif service_url contains "music.apple." -%}
+  {%- assign service_key = "apple" -%}{%- assign service_name = "Apple Music" -%}{%- assign service_letter = "A" -%}
+{%- elsif service_url contains "youtube." -%}
+  {%- assign service_key = "youtube" -%}{%- assign service_name = "YouTube Music" -%}{%- assign service_letter = "Y" -%}
+{%- else -%}
+  {%- assign service_key = "other" -%}{%- assign service_name = "the web" -%}{%- assign service_letter = "♪" -%}
+{%- endif -%}

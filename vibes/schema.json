@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Paslen vibe",
+  "description": "A vibe for the Paslen timer: dial colors, shapes and an optional playlist, pasted into the Vibe editor. Top-level fields are optional: omitted dial settings come from the app theme. The app also accepts // comments and trailing commas, the whole text is limited to 20000 characters, and unknown keys are rejected. Unknown values of shape, icon, iconStyle, fillRule and layout are accepted with a warning and replaced by a fallback; the enums below list the values the app understands.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Vibe name; empty means \"Untitled\"."
+    },
+    "playlist": {
+      "type": "string",
+      "format": "uri",
+      "description": "Link to a playlist in any music service (Spotify, Yandex Music, Deezer...). The editor puts it into the vibe's playlist field."
+    },
+    "colors": { "$ref": "#/$defs/colors" },
+    "digits": { "$ref": "#/$defs/digits" },
+    "ticks": { "$ref": "#/$defs/ticks" },
+    "backdrop": { "$ref": "#/$defs/backdrop" }
+  },
+  "$defs": {
+    "backdrop": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "One picture on the drum under the digits and ticks, upright, centred on the dial. Takes one of shape, svg or icon; none of them, or svg with icon, is an error. An unknown shape or icon (including line, capsule, wedge and pixel) gives no backdrop and a warning.",
+      "not": { "required": ["svg", "icon"] },
+      "anyOf": [
+        { "required": ["shape"] },
+        { "required": ["svg"] },
+        { "required": ["icon"] }
+      ],
+      "properties": {
+        "shape": {
+          "description": "A figured shape (case, _ and spaces do not matter).",
+          "enum": ["palm-leaf", "pistol-round", "rifle-round", "coconut-frond", "palm-tree"]
+        },
+        "svg": { "type": "string", "description": "SVG path data or an <svg> fragment, as in a tick style." },
+        "icon": { "type": "string", "description": "A built-in icon, as in a tick style." },
+        "iconStyle": { "enum": ["fill", "outline"], "default": "fill" },
+        "fillRule": { "enum": ["nonzero", "evenodd"], "default": "nonzero" },
+        "stroke": {
+          "type": "number",
+          "description": "Outline width in drum units; 0 fills the picture.",
+          "minimum": 0,
+          "maximum": 30,
+          "default": 0
+        },
+        "size": {
+          "type": "number",
+          "description": "Side of the square the picture is fitted into, in diameters of the tick ring.",
+          "minimum": 0.1,
+          "maximum": 1.5,
+          "default": 0.8
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Clockwise turn around the picture's centre, degrees.",
+          "minimum": -180,
+          "maximum": 180,
+          "default": 0
+        },
+        "offset": {
+          "description": "Shift [x, y] of the picture's centre, in radii of the tick ring.",
+          "type": "array",
+          "items": { "type": "number", "minimum": -1, "maximum": 1 },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "color": {
+          "$ref": "#/$defs/color",
+          "description": "Color of the picture; default colors.dim. A translucent color keeps it in the background."
+        }
+      }
+    },
+    "color": {
+      "type": "string",
+      "description": "#RGB, #RRGGBB or #AARRGGBB; without alpha the color is opaque.",
+      "pattern": "^\\s*#?([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})\\s*$"
+    },
+    "colorList": {
+      "description": "One color or a list of colors.",
+      "oneOf": [
+        { "$ref": "#/$defs/color" },
+        { "type": "array", "items": { "$ref": "#/$defs/color" } }
+      ]
+    },
+    "colors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "background": {
+          "$ref": "#/$defs/colorList",
+          "description": "Screen background: one color is solid, a list is a top-to-bottom gradient. Default: theme."
+        },
+        "accent": {
+          "$ref": "#/$defs/color",
+          "description": "Digits and filled ticks. Default: theme onPrimary."
+        },
+        "dim": {
+          "$ref": "#/$defs/color",
+          "description": "Empty ticks. Default: accent."
+        },
+        "marker": {
+          "$ref": "#/$defs/color",
+          "description": "Outline of the hollow 12 o'clock mark. Default: the color of that tick."
+        },
+        "markerFill": {
+          "$ref": "#/$defs/color",
+          "description": "Inside of the 12 o'clock mark. Default: top background color."
+        },
+        "notch": {
+          "$ref": "#/$defs/color",
+          "description": "Cross-line in the middle of a tick. Default: markerFill."
+        },
+        "shadow": {
+          "$ref": "#/$defs/color",
+          "description": "Offset colored copy of the digits and ticks (chromatic aberration). Without it there is no shadow."
+        }
+      }
+    },
+    "digits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "shadowOffset": {
+          "description": "Offset [x, y] of the digit shadow in dp; needs colors.shadow.",
+          "type": "array",
+          "items": { "type": "number", "minimum": -30, "maximum": 30 },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "styleName": {
+      "type": "string",
+      "description": "Name of a style from ticks.styles; an unknown name is an error."
+    },
+    "tickStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Look of one tick. Sizes are in the units of the standard dial: its filled tick is 15 wide, its empty tick is 3. A style takes one of shape, icon or svg; svg and icon together are an error.",
+      "not": { "required": ["svg", "icon"] },
+      "properties": {
+        "shape": {
+          "description": "Built-in shape (case, _ and spaces do not matter): flat bar, rounded bar, teardrop, glitchy blocks, or a figured shape drawn like an svg: banana palm leaf (evenodd), pistol round, rifle round, coconut palm frond, palm tree silhouette. Add stroke for an outline.",
+          "enum": ["line", "capsule", "wedge", "pixel", "palm-leaf", "pistol-round", "rifle-round", "coconut-frond", "palm-tree"],
+          "default": "capsule"
+        },
+        "icon": {
+          "description": "Built-in Phosphor icon instead of shape. The app also accepts PawPrint, paw_print or plural names. Icons drawn diagonally by Phosphor (axe, bone, feather, fish, guitar, key, leaf, pepper, sword) are straightened along the tick.",
+          "enum": [
+            "skull", "ghost", "bone", "sword", "axe", "mask-happy", "mask-sad", "eye", "fire",
+            "flame", "lightning", "smiley", "leaf", "tree", "tree-evergreen", "tree-palm", "flower",
+            "flower-lotus", "flower-tulip", "plant", "cactus", "clover", "acorn", "feather", "mountains",
+            "waves", "sun", "moon", "moon-stars", "star", "star-four", "sparkle", "cloud", "cloud-lightning",
+            "snowflake", "drop", "rainbow", "cat", "dog", "paw-print", "bird", "butterfly", "fish",
+            "rabbit", "bug", "horse", "coffee", "pizza", "cookie", "cake", "ice-cream", "pepper",
+            "orange-slice", "wine", "rocket", "planet", "alien", "atom", "robot", "lightbulb",
+            "gear", "heart", "crown", "diamond", "spade", "club", "trophy", "key", "anchor", "hourglass",
+            "music-note", "headphones", "guitar", "gift", "balloon", "umbrella", "spiral", "hexagon",
+            "triangle", "circle"
+          ]
+        },
+        "iconStyle": {
+          "description": "Filled icon or its outlined version (good for empty ticks).",
+          "enum": ["fill", "outline"],
+          "default": "fill"
+        },
+        "svg": {
+          "type": "string",
+          "description": "Custom shape instead of shape: SVG path data (the d attribute) or a whole <svg> fragment, whose every <path d> is taken with its own origin. Drawn as the tick looks at 12 o'clock, top outwards, fitted into width x length keeping proportions and drawn 1.25 times larger. Path data is limited to 8000 characters and 800 commands."
+        },
+        "stroke": {
+          "type": "number",
+          "description": "svg: outline width instead of fill; 0 fills the path.",
+          "minimum": 0,
+          "maximum": 30,
+          "default": 0
+        },
+        "fillRule": {
+          "description": "svg: fill rule; evenodd cuts holes. fill-rule=\"evenodd\" inside an <svg> fragment turns it on as well.",
+          "enum": ["nonzero", "evenodd"],
+          "default": "nonzero"
+        },
+        "glowStrength": {
+          "type": "number",
+          "description": "Brightness of the glow: a multiplier of its opacity, 1 is the usual glow. Neon tubes look right at 2-2.5.",
+          "minimum": 0.2,
+          "maximum": 3,
+          "default": 1
+        },
+        "core": {
+          "type": "number",
+          "description": "Neon tube: a light core along the tick, as a share of its width, in the tick color lightened towards white. Only line and capsule; others ignore it with a warning.",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0
+        },
+        "radial": {
+          "type": "boolean",
+          "description": "svg, icon or figured shape: true turns it with the ring, top outwards, like a tick; false keeps it upright all around the dial. The primitive line, capsule, wedge and pixel shapes always turn with the ring.",
+          "default": true
+        },
+        "width": {
+          "type": "number",
+          "description": "Width; the standard filled tick is 15, the empty one is 3. Widths above ~24 overlap on a 25-tick ring.",
+          "minimum": 0.5,
+          "maximum": 100,
+          "default": 15
+        },
+        "length": {
+          "type": "number",
+          "description": "Multiplier of the standard length (48 units).",
+          "minimum": 0.2,
+          "maximum": 3,
+          "default": 1
+        },
+        "glow": {
+          "type": "number",
+          "description": "Glow radius; 0 means no glow.",
+          "minimum": 0,
+          "maximum": 60,
+          "default": 0
+        },
+        "notch": {
+          "type": "boolean",
+          "description": "Cross-line in the middle of the tick; not drawn for svg or icon.",
+          "default": false
+        },
+        "shadowOffset": {
+          "description": "Offset [x, y] of the tick shadow; needs colors.shadow.",
+          "type": "array",
+          "items": { "type": "number", "minimum": -50, "maximum": 50 },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "major": {
+      "description": "Fixed style of every 5th minute (5, 10, 15, 20 and the full circle at 12 o'clock); it overrides the pattern and random.order. A string sets the same style for the filled and the empty state.",
+      "oneOf": [
+        { "$ref": "#/$defs/styleName" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "filled": { "$ref": "#/$defs/styleName", "description": "Style of a filled 5th minute; if omitted, the pattern decides." },
+            "empty": { "$ref": "#/$defs/styleName", "description": "Style of an empty 5th minute; if omitted, the pattern decides." },
+            "every": {
+              "type": "integer",
+              "description": "Step in minutes.",
+              "minimum": 2,
+              "maximum": 60,
+              "default": 5
+            }
+          }
+        }
+      ]
+    },
+    "random": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Repeatable randomness: the same seed always gives the same picture on every device.",
+      "properties": {
+        "seed": {
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647,
+          "default": 0
+        },
+        "order": {
+          "type": "boolean",
+          "description": "Ticks take pattern styles at random instead of in turn; major stays fixed.",
+          "default": false
+        },
+        "offset": {
+          "type": "number",
+          "description": "Largest shift of a tick from its place on the ring; the sign does not matter. Ring layout only.",
+          "minimum": -80,
+          "maximum": 80,
+          "default": 0
+        },
+        "rotation": {
+          "type": "number",
+          "description": "Largest tilt of a tick either way, degrees; the sign does not matter.",
+          "minimum": -180,
+          "maximum": 180,
+          "default": 0
+        },
+        "scale": {
+          "description": "Random size [min, max]; the bounds may come in any order.",
+          "type": "array",
+          "items": { "type": "number", "minimum": 0.2, "maximum": 3 },
+          "minItems": 2,
+          "maxItems": 2,
+          "default": [1, 1]
+        }
+      }
+    },
+    "ticks": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Without this section the dial keeps the standard capsules (15 filled, 3 empty).",
+      "properties": {
+        "styles": {
+          "type": "object",
+          "description": "Named tick styles referenced by filled, empty, major and marker.",
+          "additionalProperties": { "$ref": "#/$defs/tickStyle" }
+        },
+        "filled": {
+          "type": "array",
+          "description": "Repeating pattern of filled ticks counted from minute 1: minute i uses item (i - 1) mod length, the 12 o'clock tick is the last minute. An empty list keeps the standard ticks.",
+          "items": { "$ref": "#/$defs/styleName" }
+        },
+        "empty": {
+          "type": "array",
+          "description": "Same pattern for empty ticks.",
+          "items": { "$ref": "#/$defs/styleName" }
+        },
+        "major": { "$ref": "#/$defs/major" },
+        "marker": {
+          "$ref": "#/$defs/styleName",
+          "description": "Style of the hollow 12 o'clock mark; defaults to major.filled, else to the style of that tick."
+        },
+        "gradient": {
+          "$ref": "#/$defs/colorList",
+          "description": "Color of filled ticks along the arc, counted like the patterns: the first color at minute 1, the last at the 12 o'clock tick (the last minute of the circle); if empty, the accent color. On a light background the gradient runs from light to dark: one that starts dark is turned around."
+        },
+        "layout": {
+          "description": "ring: ticks around the drum; scatter: at random spots over the drum, around the digits (case does not matter).",
+          "enum": ["ring", "scatter"],
+          "default": "ring"
+        },
+        "random": { "$ref": "#/$defs/random" }
+      }
+    }
+  }
+}

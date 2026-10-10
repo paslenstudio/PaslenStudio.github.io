@@ -1,0 +1,18 @@
+---
+layout: vibes-doc
+title: Vibe JSON schema
+permalink: /vibes/schema/
+alternate: /vibes/schema.txt
+---
+{%- capture spec -%}{% include vibe-schema.md %}{%- endcapture -%}
+{%- capture agent_bar -%}
+</h1>
+<div class="agent-bar">
+  <button type="button" class="agent-btn" data-copy-agent>Copy for AI agent</button>
+  <a href="{{ '/vibes/schema.txt' | relative_url }}">Plain text</a>
+  <a href="{{ '/vibes/schema.json' | relative_url }}">JSON Schema</a>
+  <span>Paste it into your AI agent and ask for a vibe — it returns JSON you can send to Paslen.</span>
+</div>
+{%- endcapture -%}
+{{ spec | markdownify | replace_first: "</h1>", agent_bar }}
+<script type="text/plain" id="agent-spec">{{ spec }}</script>

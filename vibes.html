@@ -1,0 +1,29 @@
+---
+layout: vibes-base
+permalink: /vibes/
+---
+<main>
+  <h1 class="page-title">Vibe catalogue</h1>
+  <p class="lead">
+    Ready-made schemas for the Paslen timer — colors, dial and a playlist.<br />
+    Open one, then send it to the app. Want to make your own? See the <a href="{{ '/vibes/schema/' | relative_url }}">JSON schema</a>.
+  </p>
+
+  <ul class="grid">
+    {%- assign vibes = site.vibes | sort: "order", "last" -%}
+    {%- for vibe in vibes %}
+    {%- include vibe-service.html url=vibe.playlist %}
+    <li>
+      <a class="card" href="{{ vibe.url | relative_url }}">
+        <img src="{{ vibe.image | relative_url }}" alt="{{ vibe.title }} preview" loading="lazy" />
+        <span class="card-meta">
+          <span class="card-title">{{ vibe.title }}</span>
+          {%- if vibe.playlist %}
+          <span class="badge badge-{{ service_key }}" title="{{ service_name }}">{{ service_letter }}</span>
+          {%- endif %}
+        </span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+</main>

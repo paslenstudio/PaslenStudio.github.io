@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /vibes/schema.txt
+---
+{% include vibe-schema.md %}

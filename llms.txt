@@ -1,0 +1,21 @@
+---
+layout: null
+permalink: /llms.txt
+---
+# Paslen Studio
+
+> Paslen is a Pomodoro timer for Android. Its look (colors, digits, dial ticks) is described by a "vibe" JSON object.
+
+## Vibes
+
+- [Vibe JSON schema]({{ '/vibes/schema.txt' | absolute_url }}): full schema, field ranges, rules and an example — read this before writing a vibe
+- [Formal JSON Schema]({{ '/vibes/schema.json' | absolute_url }}): draft 2020-12 schema for validation
+- [Vibe catalogue]({{ '/vibes/' | absolute_url }}): ready-made vibes
+{%- assign vibes = site.vibes | sort: "order", "last" %}
+{%- for vibe in vibes %}
+  - [{{ vibe.title }}]({{ vibe.url | absolute_url }})
+{%- endfor %}
+
+## Apps
+
+- [Paslen timer on Google Play](https://play.google.com/store/apps/details?id=com.alki.paslen)

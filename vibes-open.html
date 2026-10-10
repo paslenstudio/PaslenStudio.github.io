@@ -1,0 +1,24 @@
+---
+layout: vibes-base
+title: Open Paslen
+permalink: /vibes/open/
+---
+{%- comment -%}
+  A fixed https page that opens Paslen on its vibe paste screen. Chatbots show it as a
+  clickable link (they don't link custom schemes like app://), so it carries no data:
+  the user copies the vibe JSON in the chat and pastes it in the app.
+{%- endcomment -%}
+<main class="open-page">
+  <h1 class="page-title">Opening Paslen…</h1>
+  <p class="lead">
+    In the app, tap <b>Paste</b>: the vibe you copied appears in the editor.
+  </p>
+  <a class="open-btn" href="{{ site.paslen_deeplink }}" data-open-app="{{ site.paslen_deeplink }}">
+    <img src="{{ '/paslen_ico.png' | relative_url }}" alt="" width="30" height="30" />
+    Open Paslen
+  </a>
+  <p class="get-app">
+    No Paslen yet?
+    <a href="https://play.google.com/store/apps/details?id=com.alki.paslen" target="_blank" rel="noopener">Get it on Google Play</a>
+  </p>
+</main>
